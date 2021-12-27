@@ -22,8 +22,43 @@
     //LISTENERS (Comandos de Entrada)
     window.addEventListener('keydown', function(e){
         var key = e.keyCode;
-        this.alert(key);
+        switch(key){
+            case LEFT:
+                mvLeft = true;
+                break;
+            case RIGHT:
+                mvRight = true;
+                break;    
+        }
+    }, false);
+
+    window.addEventListener('keyup', function(e){
+        var key = e.keyCode;
+        switch(key){
+            case LEFT:
+                mvLeft = false;
+                break;
+            case RIGHT:
+                mvRight = false;
+                break;
+            case ENTER:
+                if(gameState !== PLAYING){
+                    gameState = PLAYING;
+                }else {
+                    gameState = PAUSED;
+                }        
+        }
     }, false);
 
     // FUNÇÕES
+
+
+
+
+
+
+
+
+
+    
 }());
