@@ -11,6 +11,10 @@
     var sprites = [];
     var assetsToLoad = [];
 
+    //Sprites
+    var background = new Sprite(0, 56, 400, 500, 0, 0);
+    sprites.push(background);
+
     //Imagem
     var img = new Image();
     img.addEventListener('load', loadHandler, false);
