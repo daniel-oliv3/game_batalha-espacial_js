@@ -93,7 +93,13 @@
 
     // Função responsavel para desenhas os elementos do jogo na tela
     function render(){
-        
+        ctx.clearRect(0, 0, cnv.width, cnv.height);
+        if(sprites.length !== 0){
+            for(var i in sprites){
+                var spr = sprites[i];
+                ctx.drawImage(img, spr.sourceX, spr.sourceY, spr.width, spr.height, Math.floor(spr.x), Math.floor(spr.y), spr.width, spr.height);
+            }
+        }
     }
 
     loop();
