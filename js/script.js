@@ -190,8 +190,18 @@
     function makeAlien(){
         var alienPosition = (Math.floor(Math.random() * 8)) * 50; //cria uma valor aleatorio entre 0 e 7 => lagura  do canvas / largura do alien. //Divide o canvas em 8 colunas para o posicionamento aleatorio do alien
         
-        var alien = new Alien(30, 0, 50, 50, alienPosition, 0);
+        var alien = new Alien(30, 0, 50, 50, alienPosition, -50);
         alien.vy = 1;
+
+        //Otimização do alien
+        if(Math.floor(Math.random() * 11) > 7){
+            alien.state = alien.CRAZY;
+            alien.vx = 2;
+        }
+
+        if(Math.floor(Math.random() * 11) > 5){
+            alien.vy = 2;
+        }
 
 
         sprites.push(alien);
