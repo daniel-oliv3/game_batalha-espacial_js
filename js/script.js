@@ -7,6 +7,18 @@
     
 
     // RECURSOS DO JOGO
+    //Arrays
+    var sprites = [];
+    var assetsToLoad = [];
+
+    //Imagem
+    var img = new Image();
+    img.addEventListener('load', loadHandler, false);
+    img.src = "img/img.png";
+    assetsToLoad.push(img);
+
+    //Contador de Recursos
+    var loadedAssets = 0;
 
 
     // ENTRADAS (Setas do Teclado)
@@ -51,6 +63,15 @@
     }, false);
 
     // FUNÇÕES
+    function loadHandler(){
+        loadedAssets++;
+        if(loadedAssets === assetsToLoad.length){
+            img.removeEventListener('load', loadHandler, false);
+            //Inicia o jogo
+            gameState = PAUSED;
+        }
+    }
+
     function loop(){
         requestAnimationFrame(loop, cnv);
         //Define as ações com base no estado do jogo
@@ -67,12 +88,12 @@
 
     // Função responsavel pela atualização dos elementos do jogo 
     function update(){
-
+        alert('Update ok');
     }
 
     // Função responsavel para desenhas os elementos do jogo na tela
     function render(){
-        alert('ok');
+        
     }
 
     loop();
