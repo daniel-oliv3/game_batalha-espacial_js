@@ -129,6 +129,12 @@
 
         // Atualiza a posição
         defender.x = Math.max(0, Math.min(cnv.width - defender.width, defender.x + defender.vx));
+
+        //Atualização da posição dos misseis
+        for(var i in missiles){
+            var missile = missiles[i];
+            missile.y += missile.vy;
+        }
         
     }
 
