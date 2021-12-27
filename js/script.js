@@ -97,7 +97,21 @@
 
     // Função responsavel pela atualização dos elementos do jogo 
     function update(){
-        alert('Update ok');
+        // Move para a esquerda
+        if(mvLeft && !mvRight){
+            defender.vx = -5;
+        }
+        // Move para a direita
+        if(mvRight && !mvLeft){
+            defender.vx = 5;
+        }
+        // Para a Nave
+        if(!mvLeft && !mvRight){
+            defender.vx = 0;
+        }
+        // Atualiza a posição
+        defender.x = Math.max(0, Math.min(cnv.width - defender.width, defender.x + defender.vx));
+        
     }
 
     // Função responsavel para desenhas os elementos do jogo na tela
