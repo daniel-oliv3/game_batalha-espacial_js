@@ -159,7 +159,24 @@
             }
         }
 
-    }
+        //Move os aliens
+		for(var i in aliens){
+			var alien = aliens[i];
+			if(alien.state !== alien.EXPLODED){
+				alien.y += alien.vy;
+				if(alien.state === alien.CRAZY){
+					if(alien.x > cnv.width - alien.width || alien.x < 0){
+						alien.vx *= -1;
+					}
+					alien.x += alien.vx;
+				}
+			}
+			//confere se algum alien chegou à Terra
+			if(alien.y > cnv.height + alien.height){
+				gameState = OVER;
+			}
+		}//fim da movimentação dos aliens
+	}//fim do update
 
     //Criação dos mísseis
     function fireMissile(){
@@ -172,7 +189,13 @@
     //criação de aliens
     function makeAlien(){
         var alienPosition = (Math.floor(Math.random() * 8)) * 50; //cria uma valor aleatorio entre 0 e 7 => lagura  do canvas / largura do alien. //Divide o canvas em 8 colunas para o posicionamento aleatorio do alien
-        var alien = new Alien(30, 0, 50, 50, x, y);
+        
+        var alien = new Alien(30, 0, 50, 50, alienPosition, 0);
+        alien.vy = 1;
+
+
+        sprites.push(alien);
+        aliens.push(alien);
     }
 
     //Remove os objetos do jogo

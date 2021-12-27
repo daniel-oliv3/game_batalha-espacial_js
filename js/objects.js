@@ -32,8 +32,8 @@ Sprite.prototype.halfheight = function(){
 var Alien = function(sourceX, sourceY, width, height, x, y){
     Sprite.call(this, sourceX, sourceY, width, height, x, y);
     this.NORMAL = 1;
-    this.EXPLODED = 1;
-    this.CRAZY = 1;
+    this.EXPLODED = 2;
+    this.CRAZY = 3;
     this.state = this.NORMAL;
     this.mvStye = this.NORMAL;
 }
