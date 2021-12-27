@@ -10,6 +10,7 @@
     //Arrays
     var sprites = [];
     var assetsToLoad = [];
+    var missiles = [];
 
     //Sprites Sheets
     //Cenário
@@ -33,8 +34,8 @@
     // ENTRADAS (Setas do Teclado)
     var LEFT = 37, RIGHT = 39, ENTER = 13, SPACE = 32;
 
-    // DIREÇÕES (Nave)
-    var mvLeft = mvRight = false;
+    // Ações (Nave)
+    var mvLeft = mvRight = shoot = spaceIsDown = false;
 
     //ESTADO DO JOGO (Loading, playing, paused, over)
     var LOADING = 0, PLAYING = 1, PAUSED = 2, OVER = 3;
@@ -49,7 +50,13 @@
                 break;
             case RIGHT:
                 mvRight = true;
-                break;    
+                break;
+            case SPACE:
+                if(!spaceIsDown){
+                    shoot = true;
+                    spaceIsDown = true;
+                }
+                break;        
         }
     }, false);
 
@@ -67,7 +74,11 @@
                     gameState = PLAYING;
                 }else {
                     gameState = PAUSED;
-                }        
+                }
+                break;
+            case SPACE:
+                spaceIsDown = false;
+                break;            
         }
     }, false);
 
@@ -109,9 +120,24 @@
         if(!mvLeft && !mvRight){
             defender.vx = 0;
         }
+
+        //Disparo do canhão
+        if(shoot){
+            fireMissile();
+            shoot = false;
+        }
+
         // Atualiza a posição
         defender.x = Math.max(0, Math.min(cnv.width - defender.width, defender.x + defender.vx));
         
+    }
+
+    //Criação dos mísseis
+    function fireMissile(){
+        var missile = new Sprite(136, 12, 8, 13, defender.centerX() - 4, defender.y - 13);
+        missile.vy = -8;
+        sprites.push(missile);
+        missiles.push(missile);
     }
 
     // Função responsavel para desenhas os elementos do jogo na tela
