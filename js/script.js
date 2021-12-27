@@ -51,6 +51,31 @@
     }, false);
 
     // FUNÇÕES
+    function loop(){
+        requestAnimationFrame(loop, cnv);
+        //Define as ações com base no estado do jogo
+        switch(gameState){
+            case LOADING:
+                console.log('LOADING...');
+                break;
+            case PLAYING:
+                update();
+                break;
+        }
+        render();
+    }
+
+    // Função responsavel pela atualização dos elementos do jogo 
+    function update(){
+
+    }
+
+    // Função responsavel para desenhas os elementos do jogo na tela
+    function render(){
+        alert('ok');
+    }
+
+    loop();
 
 
 
@@ -60,5 +85,4 @@
 
 
 
-    
 }());
