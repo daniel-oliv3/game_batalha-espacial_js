@@ -134,8 +134,12 @@
         for(var i in missiles){
             var missile = missiles[i];
             missile.y += missile.vy;
+            if(missile.y < -missile.height){
+                removeObjects(missile, missiles);
+                removeObjects(missile, sprites);
+                i--;
+            }
         }
-        
     }
 
     //Criação dos mísseis
@@ -144,6 +148,14 @@
         missile.vy = -8;
         sprites.push(missile);
         missiles.push(missile);
+    }
+
+    //Remove os objetos do jogo
+    function removeObjects(objectToRemove, array){
+        var i = array.indexOf(objectToRemove);
+        if(i !== -1){
+            array.splice(i, 1);
+        }
     }
 
     // Função responsavel para desenhas os elementos do jogo na tela
