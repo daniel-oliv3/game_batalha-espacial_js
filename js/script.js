@@ -11,7 +11,7 @@
     var sprites = [];
     var assetsToLoad = [];
 
-    //Sprites
+    //Sprites Sheets
     //Cenário
     var background = new Sprite(0, 56, 400, 500, 0, 0);
     sprites.push(background);
