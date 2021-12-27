@@ -11,6 +11,11 @@
     var sprites = [];
     var assetsToLoad = [];
     var missiles = [];
+    var aliens = [];
+
+    //Variaveis úteis
+    var alienFrequency = 100;
+    var alienTimer = 0;
 
     //Sprites Sheets
     //Cenário
@@ -140,6 +145,20 @@
                 i--;
             }
         }
+        //encremento do alienTimer
+        alienTimer++;
+
+        //criação do alien, caso o o time se iguale a frenquencia
+        if(alienTimer === alienFrequency){
+            makeAlien();
+            alienTimer = 0;
+
+            //ajuste na frenquencia de criação de aliens
+            if(alienFrequency > 2){
+                alienFrequency--;
+            }
+        }
+
     }
 
     //Criação dos mísseis
@@ -150,8 +169,14 @@
         missiles.push(missile);
     }
 
+    //criação de aliens
+    function makeAlien(){
+        var alienPosition = (Math.floor(Math.random() * 8)) * 50; //cria uma valor aleatorio entre 0 e 7 => lagura  do canvas / largura do alien. //Divide o canvas em 8 colunas para o posicionamento aleatorio do alien
+        var alien = new Alien(30, 0, 50, 50, x, y);
+    }
+
     //Remove os objetos do jogo
-    function removeObjects(objectToRemove, array){
+    function removeObjects(objectToRemove, array){ 
         var i = array.indexOf(objectToRemove);
         if(i !== -1){
             array.splice(i, 1);

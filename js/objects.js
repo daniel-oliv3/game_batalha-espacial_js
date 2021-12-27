@@ -1,3 +1,4 @@
+//Nave
 var Sprite = function(sourceX, sourceY, width, height, x, y){
     this.sourceX = sourceX;
     this.sourceY = sourceY;
@@ -24,4 +25,21 @@ Sprite.prototype.halfwidth = function(){
 
 Sprite.prototype.halfheight = function(){
     return this.height/2;
+}
+
+
+//Inimigo/Herança
+var Alien = function(sourceX, sourceY, width, height, x, y){
+    Sprite.call(this, sourceX, sourceY, width, height, x, y);
+    this.NORMAL = 1;
+    this.EXPLODED = 1;
+    this.CRAZY = 1;
+    this.state = this.NORMAL;
+    this.mvStye = this.NORMAL;
+}
+//Herança/metodos da classe
+Alien.prototype = Object.create(Sprite.prototype);
+Alien.prototype.explode = function(){
+    this.sourceX = 80;
+    this.width = this.height = 56;
 }
