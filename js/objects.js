@@ -19,11 +19,11 @@ Sprite.prototype.centerY = function(){
     return this.y + (this.height/2);
 }
 
-Sprite.prototype.halfwidth = function(){
+Sprite.prototype.halfWidth = function(){
     return this.width/2;
 }
 
-Sprite.prototype.halfheight = function(){
+Sprite.prototype.halfHeight = function(){
     return this.height/2;
 }
 

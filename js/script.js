@@ -175,6 +175,18 @@
 			if(alien.y > cnv.height + alien.height){
 				gameState = OVER;
 			}
+
+            //confere se algum alien foi destroido
+            for(var j in missiles){
+                var missile = missiles[j];
+                if(collide(missile, alien) && alien.state != alien.EXPLODED){
+                    destroyAlien(alien);
+
+                    removeObjects(missile, missiles);
+                    removeObjects(missile, sprites);
+                    j--;
+                }
+            }
 		}//fim da movimentação dos aliens
 	}//fim do update
 
@@ -206,6 +218,16 @@
 
         sprites.push(alien);
         aliens.push(alien);
+    }
+
+    //Destroi aliens
+    function destroyAlien(alien){
+        alien.state = alien.EXPLODED;
+        alien.explode();
+        setTimeout(function(){
+            removeObjects(alien, aliens);
+            removeObjects(alien, sprites);
+        }, 1000);
     }
 
     //Remove os objetos do jogo
