@@ -1,3 +1,8 @@
+@font-face {
+    font-family: emulogic;
+    src: url(../fonts/emulogic.ttf);
+}
+
 body {
     background-color: #1C1C1C;
 }
