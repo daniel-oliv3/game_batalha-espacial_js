@@ -41,6 +41,11 @@
     pausedMessage.visible = false;
     messages.push(pausedMessage);
 
+    //Mensagem de game over
+    var gameOverMessage = new ObjectMessage(cnv.height/2, "", "#f00");
+    gameOverMessage.visible = false;
+    messages.push(gameOverMessage);
+
     //Placar
     var scoreMessage =  new ObjectMessage(10, "", "#0f0");
     scoreMessage.font = "normal bold 15px emulogic";
@@ -289,6 +294,16 @@
             hits = "0" + hits;
         }
         scoreMessage.text = "HITS: " + hits + " - ACURACY: " + acuracy + "%";
+    }
+
+    //Função de Game Over
+    function endGame(){
+        if(hits < scoreToWin){
+            gameOverMessage.text = "EARTH DESTROYED!";
+        }else {
+            gameOverMessage.text = "EARTH SAVED!";
+            gameOverMessage.color = "#00f";
+        }
     }
 
     // Função responsavel para desenhas os elementos do jogo na tela
