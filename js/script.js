@@ -12,6 +12,8 @@
     var assetsToLoad = [];
     var missiles = [];
     var aliens = [];
+    var messages = [];
+
 
     //Variaveis úteis
     var alienFrequency = 100;
@@ -25,6 +27,10 @@
     //Nave
     var defender = new Sprite(0, 0, 30, 50, 185, 450);
     sprites.push(defender);
+
+    //Mensagem da tela inicial
+    var startMessage = new ObjectMessage(cnv.height/2, "PRESS ENTER", "#f00");
+    messages.push(startMessage);
 
     //Imagem
     var img = new Image();
@@ -241,10 +247,24 @@
     // Função responsavel para desenhas os elementos do jogo na tela
     function render(){
         ctx.clearRect(0, 0, cnv.width, cnv.height);
-        if(sprites.length !== 0){
+        //exibe os sprites
+        if(sprites.length !== 0){ 
             for(var i in sprites){
                 var spr = sprites[i];
                 ctx.drawImage(img, spr.sourceX, spr.sourceY, spr.width, spr.height, Math.floor(spr.x), Math.floor(spr.y), spr.width, spr.height);
+            }
+        }
+        //exibe o texto
+        if(messages.length !== 0){
+            for(var i in messages){
+                var message = messages[i];
+                if(message.visible){
+                    ctx.font = message.font;
+                    ctx.fillStyle = message.color;
+                    ctx.textBaseline = message.baseline;
+                    message.x = (cnv.width - ctx.measureText(message.text).width)/2;
+                    ctx.fillText(message.text, message.x, message.y);
+                }
             }
         }
     }
