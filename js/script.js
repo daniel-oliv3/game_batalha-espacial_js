@@ -304,6 +304,10 @@
             gameOverMessage.text = "EARTH SAVED!";
             gameOverMessage.color = "#00f";
         }
+        gameOverMessage.visible = true;
+        setTimeout(function(){
+            location.reload();
+        }, 3000);
     }
 
     // Função responsavel para desenhas os elementos do jogo na tela
