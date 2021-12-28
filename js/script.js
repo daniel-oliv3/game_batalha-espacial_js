@@ -18,6 +18,10 @@
     //Variaveis úteis
     var alienFrequency = 100;
     var alienTimer = 0;
+    var shots = 0;
+    var hits = 0;
+    var acuracy = 0;
+    var scoreToWin = 70;
 
     //Sprites Sheets
     //Cenário
@@ -36,6 +40,12 @@
     var pausedMessage = new ObjectMessage(cnv.height/2, "PAUSED", "#f00");
     pausedMessage.visible = false;
     messages.push(pausedMessage);
+
+    //Placar
+    var scoreMessage =  new ObjectMessage(10, "", "#0f0");
+    scoreMessage.font = "normal bold 15px emulogic";
+    updateScore();
+    messages.push(scoreMessage);
 
     //Imagem
     var img = new Image();
@@ -156,6 +166,7 @@
             if(missile.y < -missile.height){
                 removeObjects(missile, missiles);
                 removeObjects(missile, sprites);
+                updateScore();
                 i--;
             }
         }
@@ -190,11 +201,13 @@
 				gameState = OVER;
 			}
 
-            //confere se algum alien foi destroido
+            //confere se algum alien foi destruido
             for(var j in missiles){
                 var missile = missiles[j];
                 if(collide(missile, alien) && alien.state != alien.EXPLODED){
                     destroyAlien(alien);
+                    hits++;
+                    updateScore();
 
                     removeObjects(missile, missiles);
                     removeObjects(missile, sprites);
@@ -210,6 +223,7 @@
         missile.vy = -8;
         sprites.push(missile);
         missiles.push(missile);
+        shots++;
     }
 
     //criação de aliens
@@ -250,6 +264,11 @@
         if(i !== -1){
             array.splice(i, 1);
         }
+    }
+
+    //Atualização do placar
+    function updateScore(){
+        scoreMessage.text = "HITS: " + hits + " - ACURACY: " + acuracy + "%";
     }
 
     // Função responsavel para desenhas os elementos do jogo na tela
