@@ -283,6 +283,11 @@
                 acuracy = " " + acuracy;
             }
         }
+        //ajuste no texto do hits
+        hits = hits.toString();
+        if(hits.length < 2){
+            hits = "0" + hits;
+        }
         scoreMessage.text = "HITS: " + hits + " - ACURACY: " + acuracy + "%";
     }
 
