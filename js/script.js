@@ -32,6 +32,11 @@
     var startMessage = new ObjectMessage(cnv.height/2, "PRESS ENTER", "#f00");
     messages.push(startMessage);
 
+    //Mensagem de pausa
+    var pausedMessage = new ObjectMessage(cnv.height/2, "PAUSED", "#f00");
+    pausedMessage.visible = false;
+    messages.push(pausedMessage);
+
     //Imagem
     var img = new Image();
     img.addEventListener('load', loadHandler, false);
@@ -83,8 +88,11 @@
             case ENTER:
                 if(gameState !== PLAYING){
                     gameState = PLAYING;
+                    startMessage.visible = false;
+                    pausedMessage.visible = false;
                 }else {
                     gameState = PAUSED;
+                    pausedMessage.visible = true;
                 }
                 break;
             case SPACE:
