@@ -101,13 +101,15 @@
                 mvRight = false;
                 break;
             case ENTER:
-                if(gameState !== PLAYING){
-                    gameState = PLAYING;
-                    startMessage.visible = false;
-                    pausedMessage.visible = false;
-                }else {
-                    gameState = PAUSED;
-                    pausedMessage.visible = true;
+                if(gameState !== OVER){
+                    if(gameState !== PLAYING){
+                        gameState = PLAYING;
+                        startMessage.visible = false;
+                        pausedMessage.visible = false;
+                    }else {
+                        gameState = PAUSED;
+                        pausedMessage.visible = true;
+                    }
                 }
                 break;
             case SPACE:
@@ -223,7 +225,7 @@
                     destroyAlien(alien);
                     hits++;
                     updateScore();
-                    if(hits === scoreToWin){
+                    if(parseInt(hits) === scoreToWin){
                         gameState = OVER;
                         //destroi todos os aliens
                         for(var k in aliens){
