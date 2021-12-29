@@ -22,6 +22,8 @@
     var hits = 0;
     var acuracy = 0;
     var scoreToWin = 70;
+    var FIRE = 0;
+    var EXPLOSION = 1;
 
     //Sprites Sheets
     //Cenário
@@ -247,6 +249,7 @@
         missile.vy = -8;
         sprites.push(missile);
         missiles.push(missile);
+        playSound(FIRE);
         shots++;
     }
 
@@ -276,6 +279,7 @@
     function destroyAlien(alien){
         alien.state = alien.EXPLODED;
         alien.explode();
+        playSound(EXPLOSION);
         setTimeout(function(){
             removeObjects(alien, aliens);
             removeObjects(alien, sprites);
@@ -327,6 +331,19 @@
         setTimeout(function(){
             location.reload();
         }, 3000);
+    }
+
+    //Efeitos sonros do jogo
+    function playSound(soundType){
+        var sound = document.createElement("audio");
+        if(soundType === EXPLOSION){
+            sound.src = "sound/explosion.ogg";
+        }else {
+            sound.src = "sound/fire.ogg";
+        }
+        sound.addEventListener("canplaythrough", function(){
+            sound.play();
+        }, false);
     }
 
     // Função responsavel para desenhas os elementos do jogo na tela
