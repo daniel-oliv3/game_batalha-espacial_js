@@ -136,6 +136,9 @@
             case PLAYING:
                 update();
                 break;
+            case OVER:
+                endGame();
+                break;
         }
         render();
     }
@@ -206,6 +209,13 @@
 				gameState = OVER;
 			}
 
+            //confere se algum alien colidiu com a nave
+            if(collide(alien, defender)){
+                destroyAlien(alien);
+                removeObjects(defender, sprites);
+                gameState = OVER;
+            }
+
             //confere se algum alien foi destruido
             for(var j in missiles){
                 var missile = missiles[j];
@@ -213,7 +223,14 @@
                     destroyAlien(alien);
                     hits++;
                     updateScore();
-
+                    if(hits === scoreToWin){
+                        gameState = OVER;
+                        //destroi todos os aliens
+                        for(var k in aliens){
+                            var alienk = aliens[k];
+                            destroyAlien(alienk);
+                        }
+                    }
                     removeObjects(missile, missiles);
                     removeObjects(missile, sprites);
                     j--;
